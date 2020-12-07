@@ -11,6 +11,7 @@ public class Range implements IntegerSequence{
       }
       this.start = start;
       this.end = end;
+      current = start;
   }
 
   public void reset(){
@@ -22,19 +23,37 @@ public class Range implements IntegerSequence{
   
   //When current is no longer a valid element in the range, it should return false. 
   public boolean hasNext(){
-      if (current <= end || current >= start) {
-          return true;
+      if (current > end) {
+          return false;
       }
-      return false;
+      else {
+      return true;
+      }
   }
 
   //@throws NoSuchElementException when hasNext() is false.
   //This will return the current value, it will also increase current value by 1. 
   //e.g.  if current is 5. This will make current 6, and return 5. 
   public int next(){
+    if (hasNext()) {
+        //something
+    }
+    else {
+        throw new NoSuchElementException ("Element out of range");
+    }
       int nowcurrent = current;
-      current ++;
-      return nowcurrent;
+    current ++;
+    return nowcurrent;
+  }
+  public static void main(String[] args) {
+    IntegerSequence r = new Range(10,15);
+    while(r.hasNext()){
+      System.out.print(r.next());
+      if( r.hasNext() ){       
+         System.out.print( ", " );
+      }
+    }
+    System.out.println();
   }
   
 }
