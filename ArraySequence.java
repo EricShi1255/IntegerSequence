@@ -22,9 +22,27 @@ public class ArraySequence implements IntegerSequence{
     }
     otherseq.reset();
   } 
+  
+  public void reset() {
+    currentIndex = 0;
+  }
+  public int length() {
+    return data.length;
+  }
+
+
   public boolean hasNext() {
     return currentIndex < data.length;
   }
+  public int next() {
+    if (!hasNext()) {
+      throw new NoSuchElementException("No more elements!");
+    }
+    int curr = data[currentIndex];
+    currentIndex++;
+    return curr;
+  }
+  
   
 
 }
