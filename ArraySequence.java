@@ -1,18 +1,30 @@
 import java.util.NoSuchElementException;
 public class ArraySequence implements IntegerSequence{
   int currentIndex;
-  int []data;
+  int[] data;
 
   /*Construct the sequence by copying values from the other array into the data array*/
   public ArraySequence(int [] other){
-    for (int item: other) {
-        data.add(item);
-    }
+    data = other;
+    currentIndex = 0;
   }
-  ////Postcondition: The otherseq will be reset.
-  ////This constructor will copy ALL values of the `otherseq` into the data array.
   public ArraySequence(IntegerSequence otherseq){ 
-
+    //make new array length of sequence
+    int size = 0;
+    int[] temp = new int[otherseq.length()];
+    for (int i = 0; otherseq.hasNext(); i++) {
+        temp[i] = otherseq.next();
+        size++;
+    }
+    data = new int[size];
+    for (int i = 0; i < data.length; i++) {
+        data[i] = temp[i];
+    }
+    otherseq.reset();
+  } 
+  public boolean hasNext() {
+    return currentIndex < data.length;
   }
   
+
 }
